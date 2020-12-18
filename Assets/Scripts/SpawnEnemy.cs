@@ -14,13 +14,16 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeControl += Time.deltaTime;
-        if(timeControl >= initialTime)
+        if (GameController.current.playerIsAlive)
         {
-            Instantiate(EnemiesList[Random.Range(0,EnemiesList.Count)],
-                transform.position + new Vector3(0,Random.Range(-2,3),0),transform.rotation);
-            initialTime = Random.Range(minTime, maxTime);
-            timeControl = 0;
+            timeControl += Time.deltaTime;
+            if (timeControl >= initialTime)
+            {
+                Instantiate(EnemiesList[Random.Range(0, EnemiesList.Count)],
+                    transform.position + new Vector3(0, Random.Range(-2, 3), 0), transform.rotation);
+                initialTime = Random.Range(minTime, maxTime);
+                timeControl = 0;
+            }
         }
     }
 }

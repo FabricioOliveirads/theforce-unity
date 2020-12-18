@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Transform backPoint;
     private Animator animator;
     private Rigidbody2D rig;
+
     public float minSpeed;
     public float maxSpeed;
 
@@ -21,16 +22,21 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // transform.Translate(Vector3.left * Speed * Time.deltaTime);
-        rig.velocity = new Vector2(Random.Range(minSpeed,maxSpeed)*-1, rig.velocity.y);
-        if(transform.position.x < backPoint.position.x)
+        if (GameController.current.playerIsAlive)
         {
-            Destroy(gameObject);
+            rig.velocity = new Vector2(Random.Range(minSpeed, maxSpeed) * -1, rig.velocity.y);
+            if (transform.position.x < backPoint.position.x)
+            {
+                Destroy(gameObject);
+            }
         }
     }
      void OnTriggerEnter2D(Collider2D collision)
     {
        if(collision.gameObject.tag =="Bullet")
         {
+            GetComponent<CircleCollider2D>().enabled = false;
+            GameController.current.AddScore(10);
             animator.SetTrigger("destroy");
             Destroy(gameObject,1f);
         } 

@@ -24,12 +24,17 @@ public class PlatformGeneretion : MonoBehaviour
     
     void Update()
     {
+        if (GameController.current.playerIsAlive)
+        {
+
+
         if(transform.position.x < point.position.x)
         {
             float Distance = Random.Range(minDistance, maxDistance);
             //Distance = Random.Range(3f,8f);
             transform.position = new Vector3(transform.position.x + plaftormWidth + Distance, transform.position.y, 0);
             Instantiate(Platform, transform.position, transform.rotation);
+        }
         }
     }
 }
