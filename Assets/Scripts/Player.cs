@@ -45,5 +45,25 @@ public class Player : MonoBehaviour
             GameController.current.AddScore(5);
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            GameController.current.GameOverPanel.SetActive(true);
+            GameController.current.playerIsAlive = false;
+            Destroy(gameObject);
+        }
+    }
+    public void JumBt()
+    {
+        if ( !isJumping)
+        {
+            rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+            smoke.SetActive(true);
+        }
+       
+    }
+    public void FireBt()
+    {
+        Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
     }
 }

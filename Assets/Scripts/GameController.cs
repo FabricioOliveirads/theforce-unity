@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameController : MonoBehaviour
     public float ScorePerSecond;
     public static GameController current;
     public bool playerIsAlive;
+    public GameObject GameOverPanel;
+    public Button RestartBt;
     float ScoreUpdate;
     void Start()
     {
@@ -33,5 +36,9 @@ public class GameController : MonoBehaviour
     {
         CoinScore += value;
         coinText.text = CoinScore.ToString("0000");
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
